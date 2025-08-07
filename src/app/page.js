@@ -20,17 +20,32 @@ export default async function Home() {
           <CardTitle>All Users</CardTitle>
         </CardHeader>
         <CardContent>
-          <ul className="space-y-2">
-            {records.map((record) => (
-              <li key={record.id}>
-                <Link href={`/user/${record.id}`}>
-                  <Button variant="outline" className="w-full justify-start">
-                    {record.fields.Email || "No Name"}
-                  </Button>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <table className="min-w-full border border-gray-200">
+            <thead>
+              <tr>
+                <th className="px-4 py-2 border-b">Email</th>
+                <th className="px-4 py-2 border-b">Candidate Name</th>
+                <th className="px-4 py-2 border-b">Location</th>
+                <th className="px-4 py-2 border-b">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {records.map((record) => (
+                <tr key={record.id}>
+                  <td className="px-4 py-2 border-b">{record.fields.Email || "No Email"}</td>
+                  <td className="px-4 py-2 border-b">{record.fields["Candidate Name"] || "No Name"}</td>
+                  <td className="px-4 py-2 border-b">{record.fields.Location || "No Location"}</td>
+                  <td className="px-4 py-2 border-b">
+                    <Link href={`/user/${record.id}`}>
+                      <Button variant="outline" className="w-full justify-start">
+                        View
+                      </Button>
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </CardContent>
       </Card>
     </div>
